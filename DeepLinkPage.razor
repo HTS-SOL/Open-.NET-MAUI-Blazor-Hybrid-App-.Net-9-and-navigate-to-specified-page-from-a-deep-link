@@ -1,0 +1,16 @@
+@page "/openpage"
+@inject NavigationManager Navigation
+
+<h3>Deep Link Opened!</h3>
+<p>Query String: @Message</p>
+
+@code {
+    private string Message = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        Message = query["message"] ?? "No message received";
+    }
+}
